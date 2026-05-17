@@ -1,4 +1,6 @@
-# jusconnect-platform
+# Plataforma de Prospecção e Triagem Inteligente
+
+![JusConnect Banner](docs/logojus.jpeg)
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
