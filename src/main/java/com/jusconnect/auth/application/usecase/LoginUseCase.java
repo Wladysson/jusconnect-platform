@@ -1,14 +1,14 @@
 package com.jusconnect.auth.application.usecase;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jusconnect.auth.application.dto.request.LoginRequest;
-import jusconnect.auth.application.dto.response.LoginResponse;
-import jusconnect.auth.application.mapper.AuthMapper;
-import jusconnect.auth.domain.model.RefreshToken;
-import jusconnect.auth.domain.model.UserCredential;
-import jusconnect.auth.domain.service.AuthDomainService;
-import jusconnect.auth.infrastructure.security.JwtService;
-import jusconnect.auth.infrastructure.security.PasswordEncoder;
+import com.jusconnect.auth.application.dto.request.LoginRequest;
+import com.jusconnect.auth.application.dto.response.LoginResponse;
+import com.jusconnect.auth.application.mapper.AuthMapper;
+import com.jusconnect.auth.domain.model.RefreshToken;
+import com.jusconnect.auth.domain.model.UserCredential;
+import com.jusconnect.auth.domain.service.AuthDomainService;
+import com.jusconnect.auth.infrastructure.security.JwtService;
+import com.jusconnect.auth.infrastructure.security.PasswordEncoder;
 
 @ApplicationScoped
 public class LoginUseCase {

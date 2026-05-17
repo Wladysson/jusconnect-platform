@@ -3,10 +3,10 @@ package com.jusconnect.auth.infrastructure.persistence.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
-import jusconnect.auth.domain.model.UserCredential;
-import jusconnect.auth.domain.repository.AuthRepository;
-import jusconnect.auth.infrastructure.persistence.entity.UserCredentialEntity;
-import jusconnect.auth.infrastructure.persistence.mapper.AuthPersistenceMapper;
+import com.jusconnect.auth.domain.model.UserCredential;
+import com.jusconnect.auth.domain.repository.AuthRepository;
+import com.jusconnect.auth.infrastructure.persistence.entity.UserCredentialEntity;
+import com.jusconnect.auth.infrastructure.persistence.mapper.AuthPersistenceMapper;
 
 import java.util.Optional;
 import java.util.UUID;

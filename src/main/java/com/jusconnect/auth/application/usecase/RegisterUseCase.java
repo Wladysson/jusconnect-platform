@@ -1,10 +1,10 @@
 package com.jusconnect.auth.application.usecase;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jusconnect.auth.application.dto.request.RegisterRequest;
-import jusconnect.auth.domain.model.UserCredential;
-import jusconnect.auth.domain.repository.AuthRepository;
-import jusconnect.auth.infrastructure.security.PasswordEncoder;
+import com.jusconnect.auth.application.dto.request.RegisterRequest;
+import com.jusconnect.auth.domain.model.UserCredential;
+import com.jusconnect.auth.domain.repository.AuthRepository;
+import com.jusconnect.auth.infrastructure.security.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -87,6 +87,11 @@
             <artifactId>quarkus-redis-client</artifactId>
         </dependency>
         <dependency>
+            <groupId>at.favre.lib</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.camel.quarkus</groupId>
             <artifactId>camel-quarkus-smallrye-reactive-messaging</artifactId>
         </dependency>

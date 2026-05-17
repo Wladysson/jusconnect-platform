@@ -3,11 +3,11 @@ package com.jusconnect.auth.infrastructure.persistence.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
-import jusconnect.auth.domain.enums.TokenStatus;
-import jusconnect.auth.domain.model.RefreshToken;
-import jusconnect.auth.domain.repository.TokenRepository;
-import jusconnect.auth.infrastructure.persistence.entity.RefreshTokenEntity;
-import jusconnect.auth.infrastructure.persistence.mapper.AuthPersistenceMapper;
+import com.jusconnect.auth.domain.enums.TokenStatus;
+import com.jusconnect.auth.domain.model.RefreshToken;
+import com.jusconnect.auth.domain.repository.TokenRepository;
+import com.jusconnect.auth.infrastructure.persistence.entity.RefreshTokenEntity;
+import com.jusconnect.auth.infrastructure.persistence.mapper.AuthPersistenceMapper;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

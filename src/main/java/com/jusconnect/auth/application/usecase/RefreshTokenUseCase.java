@@ -1,12 +1,12 @@
 package com.jusconnect.auth.application.usecase;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jusconnect.auth.application.dto.request.RefreshTokenRequest;
-import jusconnect.auth.application.dto.response.TokenResponse;
-import jusconnect.auth.application.mapper.AuthMapper;
-import jusconnect.auth.domain.model.RefreshToken;
-import jusconnect.auth.domain.repository.TokenRepository;
-import jusconnect.auth.infrastructure.security.JwtService;
+import com.jusconnect.auth.application.dto.request.RefreshTokenRequest;
+import com.jusconnect.auth.application.dto.response.TokenResponse;
+import com.jusconnect.auth.application.mapper.AuthMapper;
+import com.jusconnect.auth.domain.model.RefreshToken;
+import com.jusconnect.auth.domain.repository.TokenRepository;
+import com.jusconnect.auth.infrastructure.security.JwtService;
 
 @ApplicationScoped
 public class RefreshTokenUseCase {

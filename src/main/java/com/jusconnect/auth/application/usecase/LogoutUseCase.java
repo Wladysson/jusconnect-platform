@@ -1,7 +1,7 @@
 package com.jusconnect.auth.application.usecase;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jusconnect.auth.domain.service.AuthDomainService;
+import com.jusconnect.auth.domain.service.AuthDomainService;
 
 import java.util.UUID;
 

@@ -1,10 +1,10 @@
 package com.jusconnect.auth.infrastructure.persistence.mapper;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jusconnect.auth.domain.model.RefreshToken;
-import jusconnect.auth.domain.model.UserCredential;
-import jusconnect.auth.infrastructure.persistence.entity.RefreshTokenEntity;
-import jusconnect.auth.infrastructure.persistence.entity.UserCredentialEntity;
+import com.jusconnect.auth.domain.model.RefreshToken;
+import com.jusconnect.auth.domain.model.UserCredential;
+import com.jusconnect.auth.infrastructure.persistence.entity.RefreshTokenEntity;
+import com.jusconnect.auth.infrastructure.persistence.entity.UserCredentialEntity;
 
 @ApplicationScoped
 public class AuthPersistenceMapper {
