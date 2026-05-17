@@ -1,6 +1,6 @@
 package com.jusconnect.auth.domain.repository;
 
-import jusconnect.auth.domain.model.RefreshToken;
+import com.jusconnect.auth.domain.model.RefreshToken;
 
 import java.util.Optional;
 import java.util.UUID;

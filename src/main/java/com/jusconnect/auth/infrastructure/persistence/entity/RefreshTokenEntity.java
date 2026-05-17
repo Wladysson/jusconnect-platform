@@ -2,7 +2,7 @@ package com.jusconnect.auth.infrastructure.persistence.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-import jusconnect.auth.domain.enums.TokenStatus;
+import com.jusconnect.auth.domain.enums.TokenStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

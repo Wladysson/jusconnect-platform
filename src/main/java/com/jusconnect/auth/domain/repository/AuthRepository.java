@@ -1,6 +1,6 @@
 package com.jusconnect.auth.domain.repository;
 
-import jusconnect.auth.domain.model.UserCredential;
+import com.jusconnect.auth.domain.model.UserCredential;
 
 import java.util.Optional;
 import java.util.UUID;

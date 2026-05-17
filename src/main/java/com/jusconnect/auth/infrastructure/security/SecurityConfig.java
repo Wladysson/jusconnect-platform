@@ -1,16 +1,29 @@
 package com.jusconnect.auth.infrastructure.security;
 
-import io.quarkus.arc.config.ConfigProperties;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
-@ConfigProperties(prefix = "security")
 public class SecurityConfig {
 
-    public String jwtSecret;
+    @ConfigProperty(name = "security.jwt-secret")
+    String jwtSecret;
 
-    public Long jwtExpiration;
+    @ConfigProperty(name = "security.jwt-expiration")
+    Long jwtExpiration;
 
-    public String issuer;
+    @ConfigProperty(name = "security.issuer")
+    String issuer;
 
+    public String getJwtSecret() {
+        return jwtSecret;
+    }
+
+    public Long getJwtExpiration() {
+        return jwtExpiration;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
 }

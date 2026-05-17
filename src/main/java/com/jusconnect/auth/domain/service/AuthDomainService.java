@@ -1,10 +1,10 @@
 package com.jusconnect.auth.domain.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jusconnect.auth.domain.model.RefreshToken;
-import jusconnect.auth.domain.model.UserCredential;
-import jusconnect.auth.domain.repository.AuthRepository;
-import jusconnect.auth.domain.repository.TokenRepository;
+import com.jusconnect.auth.domain.model.RefreshToken;
+import com.jusconnect.auth.domain.model.UserCredential;
+import com.jusconnect.auth.domain.repository.AuthRepository;
+import com.jusconnect.auth.domain.repository.TokenRepository;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
