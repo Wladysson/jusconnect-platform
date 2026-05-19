@@ -1,0 +1,36 @@
+name: CI - JusConnect
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-cache
+
+      - name: Run Tests
+        run: ./mvnw test
+
+      - name: Build Project
+        run: ./mvnw clean package -DskipTests
+
+      - name: Build Docker Image
+        run: docker build -t jusconnect .
