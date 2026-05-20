@@ -2,7 +2,12 @@ name: CI - JusConnect
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
 
 jobs:
 
@@ -11,26 +16,42 @@ jobs:
 
     steps:
 
-      - name: Checkout
+      # ==========================================
+      # Checkout
+      # ==========================================
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # ==========================================
+      # Java 17
+      # ==========================================
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+          cache: maven
 
-      - name: Cache Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: maven-cache
+      # ==========================================
+      # Permissão Maven Wrapper
+      # ==========================================
+      - name: Grant execute permission
+        run: chmod +x mvnw
 
+      # ==========================================
+      # Testes
+      # ==========================================
       - name: Run Tests
         run: ./mvnw test
 
+      # ==========================================
+      # Build Quarkus
+      # ==========================================
       - name: Build Project
         run: ./mvnw clean package -DskipTests
 
+      # ==========================================
+      # Build Docker Runtime Only
+      # ==========================================
       - name: Build Docker Image
-        run: docker build --no-cache -t jusconnect .
+        run: docker build --no-cache -t jusconnect-platform .
