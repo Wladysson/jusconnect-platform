@@ -25,8 +25,8 @@ public class MeUseCase {
         return new MeResponse(
                 user.getId(),
                 user.getEmail(),
-                user.getEmailVerified(),
-                user.getActive()
+                user.isEmailVerified(),
+                user.isActive()
         );
     }
 }

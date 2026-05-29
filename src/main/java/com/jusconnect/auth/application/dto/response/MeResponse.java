@@ -1,19 +1,13 @@
 package com.jusconnect.auth.application.dto.response;
 
-import java.util.List;
 import java.util.UUID;
 
 public class MeResponse {
 
     private UUID id;
-
     private String email;
-
-    private Boolean emailVerified;
-
-    private List<String> roles;
-
-    private List<String> permissions;
+    private boolean emailVerified;
+    private boolean active;
 
     public MeResponse() {
     }
@@ -21,24 +15,20 @@ public class MeResponse {
     public MeResponse(
             UUID id,
             String email,
-            Boolean emailVerified,
-            List<String> roles,
-            List<String> permissions
+            boolean emailVerified,
+            boolean active
     ) {
         this.id = id;
         this.email = email;
         this.emailVerified = emailVerified;
-        this.roles = roles;
-        this.permissions = permissions;
+        this.active = active;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(
-            UUID id
-    ) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -46,39 +36,23 @@ public class MeResponse {
         return email;
     }
 
-    public void setEmail(
-            String email
-    ) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Boolean getEmailVerified() {
+    public boolean isEmailVerified() {
         return emailVerified;
     }
 
-    public void setEmailVerified(
-            Boolean emailVerified
-    ) {
+    public void setEmailVerified(boolean emailVerified) {
         this.emailVerified = emailVerified;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setRoles(
-            List<String> roles
-    ) {
-        this.roles = roles;
-    }
-
-    public List<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(
-            List<String> permissions
-    ) {
-        this.permissions = permissions;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

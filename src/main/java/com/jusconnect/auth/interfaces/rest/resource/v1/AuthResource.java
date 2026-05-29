@@ -6,12 +6,14 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import com.jusconnect.auth.application.dto.request.LoginRequest;
-import com.jusconnect.auth.application.dto.request.RefreshTokenRequest;
-import com.jusconnect.auth.application.dto.request.RegisterRequest;
-import com.jusconnect.auth.application.dto.response.LoginResponse;
-import com.jusconnect.auth.application.dto.response.TokenResponse;
+
+import io.quarkus.security.Authenticated;
+import io.quarkus.security.identity.SecurityIdentity;
+
+import com.jusconnect.auth.application.dto.request.*;
+import com.jusconnect.auth.application.dto.response.*;
 import com.jusconnect.auth.application.service.AuthApplicationService;
+import com.jusconnect.auth.application.usecase.*;
 import com.jusconnect.auth.domain.model.UserCredential;
 
 import java.util.Map;
@@ -25,6 +27,25 @@ public class AuthResource {
     @Inject
     AuthApplicationService authApplicationService;
 
+    @Inject
+    ForgotPasswordUseCase forgotPasswordUseCase;
+
+    @Inject
+    ResetPasswordUseCase resetPasswordUseCase;
+
+    @Inject
+    VerifyEmailUseCase verifyEmailUseCase;
+
+    @Inject
+    MeUseCase meUseCase;
+
+    @Inject
+    SessionUseCase sessionUseCase;
+
+    @Inject
+    SecurityIdentity identity;
+
+    // LOGIN
     @POST
     @Path("/login")
     @PermitAll
@@ -38,6 +59,7 @@ public class AuthResource {
         return Response.ok(response).build();
     }
 
+    // REGISTER
     @POST
     @Path("/register")
     @PermitAll
@@ -53,6 +75,7 @@ public class AuthResource {
                 .build();
     }
 
+    // REFRESH TOKEN
     @POST
     @Path("/refresh")
     @PermitAll
@@ -66,20 +89,118 @@ public class AuthResource {
         return Response.ok(response).build();
     }
 
-    @Inject
-    SecurityIdentity identity;
-
+    // LOGOUT
     @POST
     @Path("/logout")
     @Authenticated
     public Response logout() {
 
-        UUID userId = UUID.fromString(
-                identity.getPrincipal().getName()
-        );
+        UUID userId =
+                UUID.fromString(
+                        identity
+                                .getPrincipal()
+                                .getName()
+                );
 
         authApplicationService.logout(userId);
 
-        return Response.ok().build();
+        return Response.ok(
+                Map.of(
+                        "message",
+                        "Logout realizado com sucesso"
+                )
+        ).build();
+    }
+
+    // FORGOT PASSWORD
+    @POST
+    @Path("/password/forgot")
+    @PermitAll
+    public Response forgotPassword(
+            @Valid ForgotPasswordRequest request
+    ) {
+
+        forgotPasswordUseCase.execute(request);
+
+        return Response.ok(
+                Map.of(
+                        "message",
+                        "Email de recuperação enviado"
+                )
+        ).build();
+    }
+
+    // RESET PASSWORD
+    @POST
+    @Path("/password/reset")
+    @PermitAll
+    public Response resetPassword(
+            @Valid ResetPasswordRequest request
+    ) {
+
+        resetPasswordUseCase.execute(request);
+
+        return Response.ok(
+                Map.of(
+                        "message",
+                        "Senha redefinida com sucesso"
+                )
+        ).build();
+    }
+
+    // VERIFY EMAIL
+    @POST
+    @Path("/email/verify")
+    @PermitAll
+    public Response verifyEmail(
+            @Valid VerifyEmailRequest request
+    ) {
+
+        verifyEmailUseCase.execute(request);
+
+        return Response.ok(
+                Map.of(
+                        "message",
+                        "Email verificado com sucesso"
+                )
+        ).build();
+    }
+
+    // CURRENT USER
+    @GET
+    @Path("/me")
+    @Authenticated
+    public Response me() {
+
+        UUID userId =
+                UUID.fromString(
+                        identity
+                                .getPrincipal()
+                                .getName()
+                );
+
+        MeResponse response =
+                meUseCase.execute(userId);
+
+        return Response.ok(response).build();
+    }
+
+    // CURRENT SESSION
+    @GET
+    @Path("/session")
+    @Authenticated
+    public Response session() {
+
+        UUID userId =
+                UUID.fromString(
+                        identity
+                                .getPrincipal()
+                                .getName()
+                );
+
+        SessionResponse response =
+                sessionUseCase.execute(userId);
+
+        return Response.ok(response).build();
     }
 }
