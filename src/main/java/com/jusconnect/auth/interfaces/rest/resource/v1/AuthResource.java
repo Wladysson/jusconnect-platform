@@ -66,20 +66,20 @@ public class AuthResource {
         return Response.ok(response).build();
     }
 
+    @Inject
+    SecurityIdentity identity;
+
     @POST
     @Path("/logout")
-    public Response logout(
-            @HeaderParam("X-USER-ID")
-            UUID userCredentialId
-    ) {
+    @Authenticated
+    public Response logout() {
 
-        authApplicationService.logout(userCredentialId);
+        UUID userId = UUID.fromString(
+                identity.getPrincipal().getName()
+        );
 
-        return Response.ok(
-                Map.of(
-                        "message",
-                        "Logout realizado com sucesso"
-                )
-        ).build();
+        authApplicationService.logout(userId);
+
+        return Response.ok().build();
     }
 }
