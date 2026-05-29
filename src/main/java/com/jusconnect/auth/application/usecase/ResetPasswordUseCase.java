@@ -3,11 +3,14 @@ package com.jusconnect.auth.application.usecase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import com.jusconnect.auth.application.dto.request.ResetPasswordRequest;
-import com.jusconnect.auth.infrastructure.security.PasswordEncoder;
 import com.jusconnect.auth.domain.model.PasswordResetToken;
 import com.jusconnect.auth.domain.model.UserCredential;
-import com.jusconnect.auth.domain.repository.AuthRepository;
 import com.jusconnect.auth.domain.repository.PasswordResetRepository;
+import com.jusconnect.auth.domain.repository.AuthRepository;
+import com.jusconnect.auth.infrastructure.security.PasswordEncoder;
+import com.jusconnect.shared.kernel.exceptions.BusinessException;
+
+import java.time.LocalDateTime;
 
 @ApplicationScoped
 public class ResetPasswordUseCase {
@@ -21,40 +24,43 @@ public class ResetPasswordUseCase {
     @Inject
     PasswordEncoder passwordEncoder;
 
-    public void execute(
-            ResetPasswordRequest request
-    ) {
+    public void execute(ResetPasswordRequest request) {
 
-        PasswordResetToken token =
+        PasswordResetToken resetToken =
                 passwordResetRepository.findByToken(
-                        request.token()
-                ).orElseThrow(() ->
-                        new RuntimeException(
-                                "Token inválido"
-                        )
+                        request.getToken()
+                ).orElseThrow(
+                        () -> new BusinessException("Token inválido")
                 );
 
-        if (token.isExpired()) {
-            throw new RuntimeException(
-                    "Token expirado"
-            );
+        if (resetToken == null) {
+            throw new BusinessException("Token inválido");
         }
 
-        UserCredential user =
-                authRepository.findById(
-                        token.getUserCredentialId()
-                ).orElseThrow();
+        if (resetToken.getUsedAt() != null) {
+            throw new BusinessException("Token já utilizado");
+        }
 
-        user.setPasswordHash(
+        if (resetToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new BusinessException("Token expirado");
+        }
+
+        UserCredential credential =
+                authRepository.findById(
+                        resetToken.getUserCredentialId()
+                ).orElseThrow(
+                        () -> new BusinessException("Usuário não encontrado")
+                );
+
+        credential.setPasswordHash(
                 passwordEncoder.encode(
-                        request.newPassword()
+                        request.getNewPassword()
                 )
         );
 
-        authRepository.update(user);
+        authRepository.save(credential);
 
-        passwordResetRepository.deleteById(
-                token.getId()
-        );
+        resetToken.setUsedAt(LocalDateTime.now());
+        passwordResetRepository.save(resetToken);
     }
 }

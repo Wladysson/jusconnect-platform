@@ -9,19 +9,13 @@ public class ResetPasswordRequest {
     private String token;
 
     @NotBlank(message = "Nova senha é obrigatória")
-    @Size(
-            min = 8,
-            message = "Senha deve possuir no mínimo 8 caracteres"
-    )
+    @Size(min = 8, message = "Senha deve ter pelo menos 8 caracteres")
     private String newPassword;
 
     public ResetPasswordRequest() {
     }
 
-    public ResetPasswordRequest(
-            String token,
-            String newPassword
-    ) {
+    public ResetPasswordRequest(String token, String newPassword) {
         this.token = token;
         this.newPassword = newPassword;
     }
@@ -30,9 +24,7 @@ public class ResetPasswordRequest {
         return token;
     }
 
-    public void setToken(
-            String token
-    ) {
+    public void setToken(String token) {
         this.token = token;
     }
 
@@ -40,9 +32,7 @@ public class ResetPasswordRequest {
         return newPassword;
     }
 
-    public void setNewPassword(
-            String newPassword
-    ) {
+    public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
 }
