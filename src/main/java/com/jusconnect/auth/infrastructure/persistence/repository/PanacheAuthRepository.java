@@ -30,6 +30,17 @@ public class PanacheAuthRepository
     }
 
     @Override
+    public UserCredential update(UserCredential user) {
+
+        UserCredentialEntity entity =
+                mapper.toEntity(user);
+
+        entity.persistAndFlush();
+
+        return mapper.toDomain(entity);
+    }
+
+    @Override
     public Optional<UserCredential> findByEmail(String email) {
 
         return find("email", email)

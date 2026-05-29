@@ -23,7 +23,7 @@ public class VerifyEmailUseCase {
 
         EmailVerificationToken token =
                 repository.findByToken(
-                        request.token()
+                        request.getToken()
                 ).orElseThrow(() ->
                         new RuntimeException(
                                 "Token inválido"
@@ -41,7 +41,7 @@ public class VerifyEmailUseCase {
                         token.getUserCredentialId()
                 ).orElseThrow();
 
-        user.setEmailVerified(true);
+        user.verifyEmail();
 
         authRepository.update(user);
 

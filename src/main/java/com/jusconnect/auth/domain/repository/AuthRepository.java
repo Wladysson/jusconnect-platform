@@ -15,6 +15,8 @@ public interface AuthRepository {
 
     UserCredential save(UserCredential credential);
 
+    UserCredential update(UserCredential user);
+
     void deleteById(UUID id);
 
 }

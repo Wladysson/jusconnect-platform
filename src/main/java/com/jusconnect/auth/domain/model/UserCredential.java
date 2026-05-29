@@ -70,6 +70,7 @@ public class UserCredential {
 
     public void verifyEmail() {
         this.emailVerified = true;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public UUID getId() {
