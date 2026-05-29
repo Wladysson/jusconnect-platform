@@ -13,10 +13,6 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class UserMapper {
 
-    // ==================================================
-    // USER
-    // ==================================================
-
     public UserResponse toResponse(User user) {
 
         if (user == null) return null;
@@ -42,10 +38,6 @@ public class UserMapper {
         );
     }
 
-    // ==================================================
-    // LAWYER PROFILE
-    // ==================================================
-
     public LawyerProfileResponse toResponse(LawyerProfile profile) {
 
         if (profile == null) return null;
@@ -59,10 +51,6 @@ public class UserMapper {
         );
     }
 
-    // ==================================================
-    // CLIENT PROFILE
-    // ==================================================
-
     public ClientProfileResponse toResponse(ClientProfile profile) {
 
         if (profile == null) return null;
@@ -73,10 +61,6 @@ public class UserMapper {
                 profile.getPhone()
         );
     }
-
-    // ==================================================
-    // DOCUMENT
-    // ==================================================
 
     public DocumentResponse toResponse(Document doc) {
 
