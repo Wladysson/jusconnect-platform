@@ -5,18 +5,24 @@ import jakarta.inject.Inject;
 
 import com.jusconnect.users.domain.model.User;
 import com.jusconnect.users.domain.repository.UserRepository;
+import com.jusconnect.users.application.dto.request.UpdateUserRequest;
 
 import java.util.UUID;
 
 @ApplicationScoped
-public class GetUserByIdUseCase {
+public class UpdateUserUseCase {
 
     @Inject
     UserRepository userRepository;
 
-    public User execute(UUID id) {
+    public User execute(UUID userId, UpdateUserRequest request) {
 
-        return userRepository.findById(id)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setName(request.getName());
+        user.setUpdatedAt(java.time.LocalDateTime.now());
+
+        return userRepository.save(user);
     }
 }

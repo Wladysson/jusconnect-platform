@@ -1,5 +1,8 @@
 package com.jusconnect.users.domain.model;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 public class Document {
 
     private String type; // CPF, RG, OAB, etc
@@ -31,5 +34,21 @@ public class Document {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public UUID getId() {
+        return null;
+    }
+
+    public String getFileUrl() {
+        return "";
+    }
+
+    public boolean isVerified() {
+        return false;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return null;
     }
 }

@@ -9,14 +9,14 @@ import com.jusconnect.users.domain.repository.UserRepository;
 import java.util.UUID;
 
 @ApplicationScoped
-public class GetUserByIdUseCase {
+public class MeUserUseCase {
 
     @Inject
     UserRepository userRepository;
 
-    public User execute(UUID id) {
+    public User execute(UUID userId) {
 
-        return userRepository.findById(id)
+        return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

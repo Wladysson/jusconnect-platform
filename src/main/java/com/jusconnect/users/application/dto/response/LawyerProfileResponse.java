@@ -24,6 +24,9 @@ public class LawyerProfileResponse {
         this.bio = bio;
     }
 
+    public LawyerProfileResponse(UUID id, String oabNumber, String state, String specialty, String bio) {
+    }
+
     public UUID getId() {
         return id;
     }

@@ -1,5 +1,7 @@
 package com.jusconnect.users.domain.model;
 
+import java.util.UUID;
+
 public class ClientProfile {
 
     private String occupation;
@@ -22,5 +24,17 @@ public class ClientProfile {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public UUID getId() {
+        return null;
+    }
+
+    public String getCpf() {
+        return "";
+    }
+
+    public String getPhone() {
+        return "";
     }
 }

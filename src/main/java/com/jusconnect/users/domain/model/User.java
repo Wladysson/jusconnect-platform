@@ -1,6 +1,7 @@
 package com.jusconnect.users.domain.model;
 
 import com.jusconnect.users.domain.enums.UserStatus;
+import com.jusconnect.users.domain.enums.UserType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class User {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private UserType type;
 
     public User() {
     }
@@ -95,6 +98,8 @@ public class User {
         return address;
     }
 
+    public UserType getType() { return type; }
+
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -135,7 +140,12 @@ public class User {
         return updatedAt;
     }
 
+    public void setType(UserType type) { this.type = type; }
+
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setPasswordHash(String password) {
     }
 }
