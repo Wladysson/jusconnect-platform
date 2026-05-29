@@ -1,5 +1,7 @@
 package com.jusconnect.users.domain.model;
 
+import com.jusconnect.users.domain.enums.UserStatus;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
