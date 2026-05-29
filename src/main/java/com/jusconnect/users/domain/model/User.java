@@ -148,4 +148,8 @@ public class User {
 
     public void setPasswordHash(String password) {
     }
+
+    public String getPasswordHash() {
+        return "";
+    }
 }
