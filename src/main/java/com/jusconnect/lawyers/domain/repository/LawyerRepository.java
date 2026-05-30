@@ -34,4 +34,6 @@ public interface LawyerRepository {
     boolean existsByUserId(
             UUID userId
     );
+
+    List<Lawyer> search(String specialty, String stateBar, String city, Boolean online);
 }

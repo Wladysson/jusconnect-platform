@@ -2,20 +2,20 @@ package com.jusconnect.lawyers.domain.repository;
 
 import com.jusconnect.lawyers.domain.model.LawyerAvailability;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface AvailabilityRepository {
 
-    LawyerAvailability save(
+    void save(
             LawyerAvailability availability
     );
 
-    List<LawyerAvailability> findByLawyerId(
-            UUID lawyerId
+    Optional<LawyerAvailability> findById(
+            UUID id
     );
 
-    void deleteByLawyerId(
-            UUID lawyerId
+    void deleteById(
+            UUID id
     );
 }

@@ -94,4 +94,7 @@ public class Lawyer {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public void addExperience(LawyerExperience experience) {
+    }
 }
