@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.Response;
 
 import io.quarkus.security.Authenticated;
 
+import com.jusconnect.users.application.dto.request.UploadDocumentRequest;
 import com.jusconnect.users.application.dto.response.DocumentResponse;
 import com.jusconnect.users.application.usecase.UploadDocumentUseCase;
 import com.jusconnect.users.application.mapper.UserMapper;
@@ -30,16 +31,22 @@ public class DocumentResource {
     @Path("/{userId}")
     @Authenticated
     public Response upload(
-            @PathParam("userId") UUID userId
+            @PathParam("userId") UUID userId,
+            UploadDocumentRequest request
     ) {
 
         Document document =
-                uploadDocumentUseCase.execute(userId);
+                uploadDocumentUseCase.execute(
+                        userId,
+                        request
+                );
 
         DocumentResponse response =
                 userMapper.toResponse(document);
 
-        return Response.status(Response.Status.CREATED)
+        return Response.status(
+                        Response.Status.CREATED
+                )
                 .entity(response)
                 .build();
     }

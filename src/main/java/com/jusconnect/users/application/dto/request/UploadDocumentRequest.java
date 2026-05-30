@@ -23,4 +23,8 @@ public class UploadDocumentRequest {
     public String getFileUrl() {
         return fileUrl;
     }
+
+    public String getNumber() {
+        return "";
+    }
 }
