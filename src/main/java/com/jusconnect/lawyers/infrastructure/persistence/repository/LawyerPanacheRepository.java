@@ -14,5 +14,6 @@ public class LawyerPanacheRepository
         LawyerEntity,
         UUID> {
     public void persistOrUpdate(LawyerEntity entity) {
+
     }
 }
