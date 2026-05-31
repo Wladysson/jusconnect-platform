@@ -1,7 +1,10 @@
 package com.jusconnect.lawyers.domain.model;
 
+import com.jusconnect.lawyers.domain.enums.ReviewStatus;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.prefs.Preferences;
 
 public class LawyerReview {
 
@@ -63,5 +66,13 @@ public class LawyerReview {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void setStatus(ReviewStatus reviewStatus) {
+
+    }
+
+    public Preferences getStatus() {
+        return null;
     }
 }
