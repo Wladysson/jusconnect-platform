@@ -3,40 +3,37 @@ package com.jusconnect.lawyers.infrastructure.persistence.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-
 import com.jusconnect.lawyers.domain.model.LawyerReview;
 import com.jusconnect.lawyers.domain.repository.ReviewRepository;
 
-import com.jusconnect.lawyers.infrastructure.persistence.entity.LawyerReviewEntity;
 import com.jusconnect.lawyers.infrastructure.persistence.mapper.LawyerPersistenceMapper;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
 public class PanacheReviewRepository
-        implements ReviewRepository,
-        PanacheRepositoryBase<Optional<LawyerReview>, UUID> {
+        implements ReviewRepository {
+
+    @Inject
+    ReviewPanacheRepository panache;
 
     @Inject
     LawyerPersistenceMapper mapper;
 
     @Override
-    public void save(
+    public LawyerReview save(
             LawyerReview review
     ) {
 
-        LawyerReviewEntity entity =
-                mapper.toEntity(
-                        review
-                );
+        var entity =
+                mapper.toEntity(review);
 
-        persistOrUpdate(entity);
-    }
+        panache.persistOrUpdate(entity);
 
-    private void persistOrUpdate(LawyerReviewEntity entity) {
+        return mapper.toDomain(entity);
     }
 
     @Override
@@ -44,42 +41,51 @@ public class PanacheReviewRepository
             UUID id
     ) {
 
-        return find(
-                "id",
-                id
-        )
+        return panache.find(
+                        "id",
+                        id
+                )
                 .firstResultOptional()
-                .map(mapper::toDomain);
+                .map(
+                        mapper::toDomain
+                );
     }
 
     @Override
-    public Integer countByLawyerId(
+    public List<LawyerReview> findByLawyerId(
             UUID lawyerId
     ) {
 
-        return (int) count(
-                "lawyerId",
-                lawyerId
+        return panache.find(
+                        "lawyerId",
+                        lawyerId
+                )
+                .list()
+                .stream()
+                .map(
+                        mapper::toDomain
+                )
+                .toList();
+    }
+
+    @Override
+    public void deleteById(
+            UUID id
+    ) {
+
+        panache.delete(
+                "id",
+                id
         );
     }
 
     @Override
-    public BigDecimal averageRating(
-            UUID lawyerId
-    ) {
+    public Integer countByLawyerId(UUID lawyerId) {
+        return 0;
+    }
 
-        Double avg =
-                find(
-                        "select avg(rating) from LawyerReviewEntity where lawyerId = ?1",
-                        lawyerId
-                )
-                        .project(Double.class)
-                        .firstResult();
-
-        if (avg == null) {
-            return BigDecimal.ZERO;
-        }
-
-        return BigDecimal.valueOf(avg);
+    @Override
+    public BigDecimal averageRating(UUID lawyerId) {
+        return null;
     }
 }

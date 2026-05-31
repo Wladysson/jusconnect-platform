@@ -1,15 +1,13 @@
 package com.jusconnect.lawyers.infrastructure.persistence.repository;
 
-import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
 
 import com.jusconnect.lawyers.domain.model.Lawyer;
 import com.jusconnect.lawyers.domain.repository.LawyerRepository;
 
-import com.jusconnect.lawyers.infrastructure.persistence.entity.LawyerEntity;
 import com.jusconnect.lawyers.infrastructure.persistence.mapper.LawyerPersistenceMapper;
 
 import java.util.List;
@@ -18,21 +16,23 @@ import java.util.UUID;
 
 @ApplicationScoped
 public class PanacheLawyerRepository
-        implements LawyerRepository,
-        PanacheRepository<LawyerEntity> {
+        implements LawyerRepository {
 
     @Inject
     LawyerPersistenceMapper mapper;
+
+    @Inject
+    LawyerPanacheRepository panache;
 
     @Override
     public Lawyer save(
             Lawyer lawyer
     ) {
 
-        LawyerEntity entity =
+        var entity =
                 mapper.toEntity(lawyer);
 
-        persist(entity);
+        panache.persistOrUpdate(entity);
 
         return mapper.toDomain(entity);
     }
@@ -42,10 +42,10 @@ public class PanacheLawyerRepository
             UUID id
     ) {
 
-        return find(
-                "id",
-                id
-        )
+        return panache.find(
+                        "id",
+                        id
+                )
                 .firstResultOptional()
                 .map(mapper::toDomain);
     }
@@ -55,10 +55,10 @@ public class PanacheLawyerRepository
             UUID userId
     ) {
 
-        return find(
-                "userId",
-                userId
-        )
+        return panache.find(
+                        "userId",
+                        userId
+                )
                 .firstResultOptional()
                 .map(mapper::toDomain);
     }
@@ -66,7 +66,7 @@ public class PanacheLawyerRepository
     @Override
     public List<Lawyer> findAll() {
 
-        return (PanacheQuery<LawyerEntity>) listAll()
+        return panache.listAll()
                 .stream()
                 .map(mapper::toDomain)
                 .toList();
@@ -75,19 +75,20 @@ public class PanacheLawyerRepository
     @Override
     public List<Lawyer> search(
             String specialty,
-            String state
+            String stateBar
     ) {
 
-        String query =
-                "(:specialty is null or specialty = :specialty) " +
-                        "and (:state is null or stateBar = :state)";
-
-        return find(
-                query,
-                io.quarkus.panache.common.Parameters
-                        .with("specialty", specialty)
-                        .and("state", state)
-        )
+        return panache.find(
+                        "(:specialty is null or specialty = :specialty) " +
+                                "and (:stateBar is null or stateBar = :stateBar)",
+                        Parameters.with(
+                                "specialty",
+                                specialty
+                        ).and(
+                                "stateBar",
+                                stateBar
+                        )
+                )
                 .list()
                 .stream()
                 .map(mapper::toDomain)
@@ -95,23 +96,38 @@ public class PanacheLawyerRepository
     }
 
     @Override
+    public List<Lawyer> search(
+            String specialty,
+            String stateBar,
+            String city,
+            Boolean online
+    ) {
+
+        return panache.listAll()
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public boolean existsByUserId(
+            UUID userId
+    ) {
+
+        return panache.count(
+                "userId",
+                userId
+        ) > 0;
+    }
+
+    @Override
     public void deleteById(
             UUID id
     ) {
 
-        delete(
+        panache.delete(
                 "id",
                 id
         );
-    }
-
-    @Override
-    public boolean existsByUserId(UUID userId) {
-        return false;
-    }
-
-    @Override
-    public List<Lawyer> search(String specialty, String stateBar, String city, Boolean online) {
-        return List.of();
     }
 }
