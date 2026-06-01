@@ -13,10 +13,15 @@ import com.jusconnect.leads.application.dto.request.UpdateLeadRequest;
 
 import com.jusconnect.leads.application.mapper.LeadMapper;
 import com.jusconnect.leads.application.service.LeadApplicationService;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/leads")
+@Tag(
+        name = "Leads",
+        description = "Gestão de leads"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class LeadResource {

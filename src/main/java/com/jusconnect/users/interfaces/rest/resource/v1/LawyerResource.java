@@ -14,10 +14,15 @@ import com.jusconnect.users.application.usecase.UpdateLawyerProfileUseCase;
 import com.jusconnect.users.application.mapper.UserMapper;
 
 import com.jusconnect.users.domain.model.LawyerProfile;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/lawyers")
+@Tag(
+        name = "Lawyers",
+        description = "Gestão de advogados"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class LawyerResource {

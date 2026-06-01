@@ -13,10 +13,15 @@ import com.jusconnect.users.application.dto.request.CreateUserRequest;
 import com.jusconnect.users.application.dto.request.UpdateUserRequest;
 import com.jusconnect.users.application.dto.response.UserResponse;
 import com.jusconnect.users.application.service.UserApplicationService;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/users")
+@Tag(
+        name = "Users",
+        description = "Gestão de usuários"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {

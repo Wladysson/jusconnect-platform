@@ -9,10 +9,15 @@ import jakarta.ws.rs.core.Response;
 import com.jusconnect.leads.application.dto.request.AssignLeadRequest;
 import com.jusconnect.leads.application.mapper.LeadMapper;
 import com.jusconnect.leads.application.service.LeadApplicationService;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/leads")
+@Tag(
+        name = "Assignments",
+        description = "Atribuição de leads"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AssignmentResource {

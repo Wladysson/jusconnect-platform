@@ -13,10 +13,15 @@ import com.jusconnect.users.application.usecase.UploadDocumentUseCase;
 import com.jusconnect.users.application.mapper.UserMapper;
 
 import com.jusconnect.users.domain.model.Document;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/documents")
+@Tag(
+        name = "Documents",
+        description = "Gestão de documentos"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class DocumentResource {

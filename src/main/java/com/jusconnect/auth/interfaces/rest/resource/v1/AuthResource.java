@@ -15,11 +15,13 @@ import com.jusconnect.auth.application.dto.response.*;
 import com.jusconnect.auth.application.service.AuthApplicationService;
 import com.jusconnect.auth.application.usecase.*;
 import com.jusconnect.auth.domain.model.UserCredential;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.Map;
 import java.util.UUID;
 
 @Path("/api/v1/auth")
+@Tag(name = "Authentication", description = "Autenticação e sessão")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthResource {

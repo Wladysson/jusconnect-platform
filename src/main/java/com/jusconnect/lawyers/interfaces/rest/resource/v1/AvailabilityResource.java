@@ -13,10 +13,15 @@ import com.jusconnect.lawyers.application.mapper.LawyerMapper;
 import com.jusconnect.lawyers.application.usecase.UpdateAvailabilityUseCase;
 
 import com.jusconnect.lawyers.domain.model.LawyerAvailability;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/lawyers/availability")
+@Tag(
+        name = "Availability",
+        description = "Disponibilidade de advogados"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AvailabilityResource {

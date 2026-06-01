@@ -13,10 +13,15 @@ import com.jusconnect.lawyers.application.mapper.LawyerMapper;
 import com.jusconnect.lawyers.application.usecase.CreateReviewUseCase;
 
 import com.jusconnect.lawyers.domain.model.LawyerReview;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
 @Path("/api/v1/lawyers/reviews")
+@Tag(
+        name = "Reviews",
+        description = "Avaliações de advogados"
+)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReviewResource {
