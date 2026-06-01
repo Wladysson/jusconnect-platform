@@ -3,8 +3,6 @@ package com.jusconnect.leads.infrastructure.persistence.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
-
 import com.jusconnect.leads.domain.model.Lead;
 import com.jusconnect.leads.domain.repository.LeadRepository;
 
@@ -19,8 +17,10 @@ import java.util.UUID;
 
 @ApplicationScoped
 public class PanacheLeadRepository
-        implements LeadRepository,
-        PanacheRepository<LeadEntity> {
+        implements LeadRepository {
+
+    @Inject
+    LeadPanacheRepository repository;
 
     @Inject
     LeadPersistenceMapper mapper;
@@ -35,17 +35,17 @@ public class PanacheLeadRepository
                         lead
                 );
 
-        if (findById(
+        if (repository.findById(
                 entity.getId()
         ) == null) {
 
-            persist(
+            repository.persist(
                     entity
             );
 
         } else {
 
-            getEntityManager()
+            repository.getEntityManager()
                     .merge(
                             entity
                     );
@@ -61,10 +61,10 @@ public class PanacheLeadRepository
             UUID id
     ) {
 
-        return find(
-                "id",
-                id
-        )
+        return repository.find(
+                        "id",
+                        id
+                )
                 .firstResultOptional()
                 .map(
                         mapper::toDomain
@@ -74,7 +74,7 @@ public class PanacheLeadRepository
     @Override
     public List<Lead> findAll() {
 
-        return listAll()
+        return repository.listAll()
                 .stream()
                 .map(
                         mapper::toDomain
@@ -88,19 +88,19 @@ public class PanacheLeadRepository
             String status
     ) {
 
-        return find(
-                "(:legalArea is null or legalArea = :legalArea) " +
-                        "and (:status is null or status = :status)",
+        return repository.find(
+                        "(:legalArea is null or legalArea = :legalArea) " +
+                                "and (:status is null or status = :status)",
 
-                Parameters.with(
-                                "legalArea",
-                                legalArea
-                        )
-                        .and(
-                                "status",
-                                status
-                        )
-        )
+                        Parameters.with(
+                                        "legalArea",
+                                        legalArea
+                                )
+                                .and(
+                                        "status",
+                                        status
+                                )
+                )
                 .list()
                 .stream()
                 .map(
@@ -114,7 +114,7 @@ public class PanacheLeadRepository
             String email
     ) {
 
-        return count(
+        return repository.count(
                 "email",
                 email
         ) > 0;
@@ -125,7 +125,7 @@ public class PanacheLeadRepository
             UUID id
     ) {
 
-        delete(
+        repository.delete(
                 "id",
                 id
         );

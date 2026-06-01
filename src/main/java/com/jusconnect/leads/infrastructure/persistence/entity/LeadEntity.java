@@ -43,7 +43,7 @@ public class LeadEntity {
     public LeadEntity() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
