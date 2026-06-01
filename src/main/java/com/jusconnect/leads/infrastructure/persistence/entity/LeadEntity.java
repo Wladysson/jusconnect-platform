@@ -43,7 +43,7 @@ public class LeadEntity {
     public LeadEntity() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -55,7 +55,9 @@ public class LeadEntity {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(
+            UUID userId
+    ) {
         this.userId = userId;
     }
 
