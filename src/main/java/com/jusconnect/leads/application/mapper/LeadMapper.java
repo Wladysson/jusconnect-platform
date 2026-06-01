@@ -140,4 +140,8 @@ public class LeadMapper {
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
+
+    public Object toAssignmentResponse(LeadAssignment assign) {
+        return null;
+    }
 }
