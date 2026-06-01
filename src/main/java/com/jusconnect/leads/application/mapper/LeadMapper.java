@@ -144,4 +144,12 @@ public class LeadMapper {
     public Object toAssignmentResponse(LeadAssignment assign) {
         return null;
     }
+
+    public Object toScoreResponse(LeadScore leadScore) {
+        return null;
+    }
+
+    public Object toHistoryList(List<LeadHistory> history) {
+        return null;
+    }
 }
