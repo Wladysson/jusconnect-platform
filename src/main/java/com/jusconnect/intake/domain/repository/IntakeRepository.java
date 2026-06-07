@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface IntakeRepository {
 
-    void save(Intake intake);
+    Intake save(Intake intake);
 
     void update(Intake intake);
 
