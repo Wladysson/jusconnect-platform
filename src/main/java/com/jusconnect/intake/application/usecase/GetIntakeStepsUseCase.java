@@ -17,12 +17,19 @@ public class GetIntakeStepsUseCase {
     @Inject
     IntakeRepository intakeRepository;
 
+    public GetIntakeStepsUseCase(IntakeRepository intakeRepository) {
+    }
+
     public List<IntakeStep> execute(
             UUID intakeId
     ) {
 
         Intake intake = intakeRepository.findById(
                 intakeId
+        ).orElseThrow(
+                () -> new IllegalArgumentException(
+                        "Intake não encontrado"
+                )
         );
 
         if (intake == null) {

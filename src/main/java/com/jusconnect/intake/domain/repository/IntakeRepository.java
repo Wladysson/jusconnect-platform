@@ -16,8 +16,14 @@ public interface IntakeRepository {
 
     Optional<Intake> findById(UUID id);
 
-    List<Intake> findAll();
+    List<Intake> findAllIntakes();
 
     List<Intake> findByLeadId(UUID leadId);
+
+    List<Intake> search(
+            String status,
+            String type,
+            Object createdBy
+    );
 
 }

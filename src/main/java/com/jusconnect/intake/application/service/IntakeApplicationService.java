@@ -35,7 +35,7 @@ public class IntakeApplicationService {
     }
 
     public List<Intake> findAll() {
-        return intakeRepository.findAll();
+        return intakeRepository.findAllIntakes();
     }
 
     public void delete(

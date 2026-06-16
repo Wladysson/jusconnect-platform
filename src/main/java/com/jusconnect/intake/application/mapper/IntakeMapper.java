@@ -21,10 +21,10 @@ public class IntakeMapper {
         response.setId(intake.getId());
         response.setLeadId(intake.getLeadId());
         response.setStatus(
-                intake.getStatus().name()
+                intake.getStatus()
         );
         response.setType(
-                intake.getType().name()
+                intake.getType()
         );
         response.setCreatedAt(
                 intake.getCreatedAt()
@@ -46,10 +46,10 @@ public class IntakeMapper {
         response.setId(intake.getId());
         response.setLeadId(intake.getLeadId());
         response.setStatus(
-                intake.getStatus().name()
+                intake.getStatus()
         );
         response.setType(
-                intake.getType().name()
+                intake.getStatus()
         );
         response.setCreatedAt(
                 intake.getCreatedAt()

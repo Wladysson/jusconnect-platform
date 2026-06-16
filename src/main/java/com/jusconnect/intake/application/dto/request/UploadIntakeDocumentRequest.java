@@ -51,4 +51,8 @@ public class UploadIntakeDocumentRequest {
     ) {
         this.fileUrl = fileUrl;
     }
+
+    public Object getContentType() {
+        return null;
+    }
 }

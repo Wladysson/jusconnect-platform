@@ -5,6 +5,7 @@ import com.jusconnect.intake.domain.enums.IntakeStatus;
 import com.jusconnect.intake.domain.model.Intake;
 import com.jusconnect.intake.domain.repository.IntakeRepository;
 
+import com.jusconnect.intake.domain.service.IntakeDomainService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -16,6 +17,9 @@ public class CreateIntakeUseCase {
 
     @Inject
     IntakeRepository intakeRepository;
+
+    public CreateIntakeUseCase(IntakeRepository intakeRepository, IntakeDomainService intakeDomainService) {
+    }
 
     public Intake execute(
             CreateIntakeRequest request
@@ -36,7 +40,7 @@ public class CreateIntakeUseCase {
         );
 
         intake.setStatus(
-                IntakeStatus.IN_PROGRESS
+                IntakeStatus.IN_PROGRESS.name()
         );
 
         intake.setCreatedAt(

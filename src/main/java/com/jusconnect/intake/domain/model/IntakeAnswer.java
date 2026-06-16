@@ -53,4 +53,18 @@ public class IntakeAnswer {
     public void setAnsweredAt(LocalDateTime answeredAt) {
         this.answeredAt = answeredAt;
     }
+
+    public void setIntakeId(UUID intakeId) {
+    }
+
+    public void setCreatedAt(LocalDateTime now) {
+    }
+
+    public UUID getIntakeId() {
+        return null;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return null;
+    }
 }

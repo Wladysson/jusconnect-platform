@@ -14,20 +14,19 @@ public class GetIntakeByIdUseCase {
     @Inject
     IntakeRepository intakeRepository;
 
+    public GetIntakeByIdUseCase(IntakeRepository intakeRepository) {
+    }
+
     public Intake execute(
             UUID intakeId
     ) {
 
-        Intake intake = intakeRepository.findById(
+        return intakeRepository.findById(
                 intakeId
+        ).orElseThrow(
+                () -> new IllegalArgumentException(
+                        "Intake não encontrado"
+                )
         );
-
-        if (intake == null) {
-            throw new IllegalArgumentException(
-                    "Intake não encontrado"
-            );
-        }
-
-        return intake;
     }
 }

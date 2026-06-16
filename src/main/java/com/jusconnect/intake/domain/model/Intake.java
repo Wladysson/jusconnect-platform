@@ -77,4 +77,26 @@ public class Intake {
     public void setDocuments(List<IntakeDocument> documents) {
         this.documents = documents;
     }
+
+    public void setType(String type) {
+
+    }
+
+    public String getType() {
+        return null;
+    }
+
+    public UUID getUserId() {
+        return null;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return null;
+    }
+
+    public void setUserId(UUID userId) {
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+    }
 }

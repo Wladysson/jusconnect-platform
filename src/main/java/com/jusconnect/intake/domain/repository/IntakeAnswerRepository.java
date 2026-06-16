@@ -1,6 +1,7 @@
 package com.jusconnect.intake.domain.repository;
 
 import com.jusconnect.intake.domain.model.IntakeAnswer;
+import com.jusconnect.intake.infrastructure.persistence.entity.IntakeAnswerEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,7 @@ public interface IntakeAnswerRepository {
 
     void delete(UUID id);
 
+    List<IntakeAnswerEntity> findByIntakeId(
+            UUID intakeId
+    );
 }

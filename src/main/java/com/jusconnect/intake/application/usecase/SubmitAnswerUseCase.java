@@ -22,6 +22,9 @@ public class SubmitAnswerUseCase {
     @Inject
     IntakeAnswerRepository answerRepository;
 
+    public SubmitAnswerUseCase(IntakeRepository intakeRepository, IntakeAnswerRepository intakeAnswerRepository) {
+    }
+
     @Transactional
     public IntakeAnswer execute(
             UUID intakeId,
@@ -30,6 +33,10 @@ public class SubmitAnswerUseCase {
 
         Intake intake = intakeRepository.findById(
                 intakeId
+        ).orElseThrow(
+                () -> new IllegalArgumentException(
+                        "Intake não encontrado"
+                )
         );
 
         if (intake == null) {

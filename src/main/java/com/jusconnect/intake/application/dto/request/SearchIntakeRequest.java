@@ -40,4 +40,8 @@ public class SearchIntakeRequest {
     ) {
         this.type = type;
     }
+
+    public Object getCreatedBy() {
+        return null;
+    }
 }

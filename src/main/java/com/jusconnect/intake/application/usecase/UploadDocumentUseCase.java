@@ -18,6 +18,9 @@ public class UploadDocumentUseCase {
     @Inject
     IntakeRepository intakeRepository;
 
+    public UploadDocumentUseCase(IntakeRepository intakeRepository) {
+    }
+
     @Transactional
     public IntakeDocument execute(
             UUID intakeId,
@@ -26,6 +29,10 @@ public class UploadDocumentUseCase {
 
         Intake intake = intakeRepository.findById(
                 intakeId
+        ).orElseThrow(
+                () -> new IllegalArgumentException(
+                        "Intake não encontrado"
+                )
         );
 
         if (intake == null) {

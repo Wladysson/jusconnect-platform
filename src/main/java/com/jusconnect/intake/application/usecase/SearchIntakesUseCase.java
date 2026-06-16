@@ -15,6 +15,9 @@ public class SearchIntakesUseCase {
     @Inject
     IntakeRepository intakeRepository;
 
+    public SearchIntakesUseCase(IntakeRepository intakeRepository) {
+    }
+
     public List<Intake> execute(
             SearchIntakeRequest request
     ) {

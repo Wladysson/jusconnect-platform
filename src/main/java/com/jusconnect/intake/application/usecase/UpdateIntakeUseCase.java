@@ -15,6 +15,9 @@ public class UpdateIntakeUseCase {
     @Inject
     IntakeRepository intakeRepository;
 
+    public UpdateIntakeUseCase(IntakeRepository intakeRepository) {
+    }
+
     public Intake execute(
             UUID intakeId,
             UpdateIntakeRequest request
@@ -22,6 +25,10 @@ public class UpdateIntakeUseCase {
 
         Intake intake = intakeRepository.findById(
                 intakeId
+        ).orElseThrow(
+                () -> new IllegalArgumentException(
+                        "Intake não encontrado"
+                )
         );
 
         if (intake == null) {
