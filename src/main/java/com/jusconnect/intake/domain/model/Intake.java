@@ -1,5 +1,7 @@
 package com.jusconnect.intake.domain.model;
 
+import com.jusconnect.intake.application.dto.request.CreateIntakeRequest;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,10 @@ public class Intake {
         this.leadId = leadId;
         this.status = status;
         this.createdAt = createdAt;
+    }
+
+    public static Intake from(CreateIntakeRequest request) {
+        return null;
     }
 
     public UUID getId() {
