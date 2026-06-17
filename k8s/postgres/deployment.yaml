@@ -1,26 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: title
+  name: postgres
+  namespace: jusconnect
   labels:
-    app: title
+    app: postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: title
+      app: postgres
   template:
     metadata:
-      name: title
       labels:
-        app: title
+        app: postgres
     spec:
       containers:
-        - name: title
-          image: nginx
-          imagePullPolicy: IfNotPresent
+        - name: postgres
+          image: postgres:16
           ports:
-            - containerPort: 80
-              protocol: TCP
-      restartPolicy: Always
-
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: jusconnect
+            - name: POSTGRES_USER
+              value: jusconnect
+            - name: POSTGRES_PASSWORD
+              value: jusconnect

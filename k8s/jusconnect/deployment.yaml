@@ -1,26 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: title
+  name: jusconnect
+  namespace: jusconnect
   labels:
-    app: title
+    app: jusconnect
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: title
+      app: jusconnect
   template:
     metadata:
-      name: title
       labels:
-        app: title
+        app: jusconnect
     spec:
       containers:
-        - name: title
-          image: nginx
-          imagePullPolicy: IfNotPresent
+        - name: jusconnect
+          image: jusconnect-platform:1.0.1
+          imagePullPolicy: Never
           ports:
-            - containerPort: 80
-              protocol: TCP
-      restartPolicy: Always
-      
+            - containerPort: 8080
+          env:
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: "jdbc:postgresql://postgres:5432/jusconnect"
+
+            - name: QUARKUS_DATASOURCE_USERNAME
+              value: jusconnect
+
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              value: jusconnect

@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: title
+  name: jusconnect
+  namespace: jusconnect
 spec:
   selector:
-    app: title
+    app: jusconnect
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 8080
   type: NodePort
-  
