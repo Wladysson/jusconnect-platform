@@ -112,4 +112,8 @@ public class Triage {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public Integer getFinalScore() {
+        return 0;
+    }
 }
