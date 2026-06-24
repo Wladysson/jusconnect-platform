@@ -55,7 +55,7 @@ public class TriageApplicationService {
 
     public List<Triage> findAll() {
 
-        return triageRepository.findAll();
+        return triageRepository.findAllTriages();
     }
 
     public List<Triage> findByIntakeId(

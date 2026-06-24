@@ -24,7 +24,7 @@ public interface TriageRepository {
             UUID id
     );
 
-    List<Triage> findAll();
+    List<Triage> findAllTriages();
 
     List<Triage> findByIntakeId(
             UUID intakeId

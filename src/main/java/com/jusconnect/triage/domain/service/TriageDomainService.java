@@ -5,7 +5,9 @@ import com.jusconnect.triage.domain.model.Triage;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class TriageDomainService {
 
     public Triage create(

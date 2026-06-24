@@ -2,12 +2,14 @@ package com.jusconnect.triage.domain.service;
 
 import com.jusconnect.triage.domain.model.LawyerSuggestion;
 import com.jusconnect.triage.domain.model.Triage;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@ApplicationScoped
 public class LawyerRecommendationService {
 
     public List<LawyerSuggestion> recommend(

@@ -4,7 +4,9 @@ import com.jusconnect.triage.domain.enums.PriorityLevel;
 import com.jusconnect.triage.domain.model.Triage;
 import com.jusconnect.triage.domain.model.TriageClassification;
 import com.jusconnect.triage.domain.model.TriageScore;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class TriageScoreCalculator {
 
     public TriageScore calculateScore(
