@@ -116,4 +116,7 @@ public class Triage {
     public Integer getFinalScore() {
         return 0;
     }
+
+    public void setFinalScore(Integer finalScore) {
+    }
 }
