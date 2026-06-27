@@ -2,9 +2,11 @@ package com.jusconnect.scheduling.domain.service;
 
 import com.jusconnect.scheduling.domain.enums.AppointmentStatus;
 import com.jusconnect.scheduling.domain.model.Appointment;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.UUID;
 
+@ApplicationScoped
 public class AvailabilityService {
 
     public void validateAvailability(

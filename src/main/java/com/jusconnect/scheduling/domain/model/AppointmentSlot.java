@@ -24,6 +24,9 @@ public class AppointmentSlot {
     public AppointmentSlot() {
     }
 
+    public AppointmentSlot(LocalDate date, LocalTime time, LocalTime slotEnd) {
+    }
+
     public UUID getLawyerId() {
         return lawyerId;
     }

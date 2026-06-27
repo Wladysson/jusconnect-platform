@@ -1,13 +1,16 @@
 package com.jusconnect.scheduling.application.usecase;
 
+import com.jusconnect.scheduling.domain.model.Appointment;
 import com.jusconnect.scheduling.domain.model.AppointmentSlot;
 import com.jusconnect.scheduling.domain.repository.AppointmentRepository;
 import com.jusconnect.scheduling.domain.service.SchedulingDomainService;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@ApplicationScoped
 public class GetAvailableSlotsUseCase {
 
     private final AppointmentRepository appointmentRepository;
@@ -27,16 +30,13 @@ public class GetAvailableSlotsUseCase {
             LocalDate date
     ) {
 
-        List<AppointmentSlot> occupiedSlots =
-                appointmentRepository.findOccupiedSlots(
-                        lawyerId,
-                        date
-                );
+        List<Appointment> appointments =
+                appointmentRepository.findOccupiedSlots(lawyerId, date);
 
         return schedulingDomainService.calculateAvailableSlots(
                 lawyerId,
                 date,
-                occupiedSlots
+                appointments
         );
     }
 

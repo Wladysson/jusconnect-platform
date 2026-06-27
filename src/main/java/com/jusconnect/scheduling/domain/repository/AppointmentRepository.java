@@ -1,9 +1,9 @@
 package com.jusconnect.scheduling.domain.repository;
 
 import com.jusconnect.scheduling.domain.model.Appointment;
-import com.jusconnect.scheduling.domain.model.AppointmentSlot;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +29,11 @@ public interface AppointmentRepository {
             String appointmentType
     );
 
-    List<AppointmentSlot> findOccupiedSlots(
+    List<Appointment> findConflicts(UUID lawyerId,
+                                    LocalDateTime start,
+                                    LocalDateTime end);
+
+    List<Appointment> findOccupiedSlots(
             UUID lawyerId,
             LocalDate date
     );

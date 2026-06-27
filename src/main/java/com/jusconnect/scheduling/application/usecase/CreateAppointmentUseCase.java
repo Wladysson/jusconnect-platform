@@ -3,7 +3,9 @@ package com.jusconnect.scheduling.application.usecase;
 import com.jusconnect.scheduling.domain.model.Appointment;
 import com.jusconnect.scheduling.domain.repository.AppointmentRepository;
 import com.jusconnect.scheduling.domain.service.SchedulingDomainService;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class CreateAppointmentUseCase {
 
     private final AppointmentRepository appointmentRepository;

@@ -5,6 +5,7 @@ import com.jusconnect.scheduling.domain.enums.AppointmentType;
 import com.jusconnect.scheduling.domain.enums.MeetingPlatform;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 public class Appointment {
@@ -175,5 +176,13 @@ public class Appointment {
 
     public LocalDateTime getAppointmentDateTime() {
         return scheduledAt;
+    }
+
+    public OffsetDateTime getStartTime() {
+        return null;
+    }
+
+    public OffsetDateTime getEndTime() {
+        return null;
     }
 }

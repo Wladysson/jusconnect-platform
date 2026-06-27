@@ -1,6 +1,7 @@
 package com.jusconnect.scheduling.domain.service;
 
 import com.jusconnect.scheduling.domain.model.AppointmentSlot;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@ApplicationScoped
 public class SlotGenerationService {
 
     private static final LocalTime START_TIME =

@@ -2,9 +2,11 @@ package com.jusconnect.scheduling.domain.service;
 
 import com.jusconnect.scheduling.domain.enums.AppointmentStatus;
 import com.jusconnect.scheduling.domain.model.Appointment;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDateTime;
 
+@ApplicationScoped
 public class AppointmentValidationService {
 
     public void validateAppointment(
