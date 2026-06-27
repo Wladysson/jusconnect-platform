@@ -1,0 +1,85 @@
+package com.jusconnect.scheduling.domain.model;
+
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.UUID;
+
+public class LawyerAvailability {
+
+    private UUID id;
+
+    private UUID lawyerId;
+
+    private DayOfWeek dayOfWeek;
+
+    private LocalTime startTime;
+
+    private LocalTime endTime;
+
+    private Integer appointmentDuration;
+
+    private Boolean active;
+
+    public LawyerAvailability() {
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getLawyerId() {
+        return lawyerId;
+    }
+
+    public void setLawyerId(UUID lawyerId) {
+        this.lawyerId = lawyerId;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Integer getAppointmentDuration() {
+        return appointmentDuration;
+    }
+
+    public void setAppointmentDuration(Integer appointmentDuration) {
+        this.appointmentDuration = appointmentDuration;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return Boolean.TRUE.equals(active);
+    }
+}
