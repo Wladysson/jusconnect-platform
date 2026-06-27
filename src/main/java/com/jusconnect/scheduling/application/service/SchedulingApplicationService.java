@@ -8,6 +8,7 @@ import com.jusconnect.scheduling.application.usecase.RescheduleAppointmentUseCas
 import com.jusconnect.scheduling.application.usecase.SearchAppointmentsUseCase;
 import com.jusconnect.scheduling.domain.model.Appointment;
 import com.jusconnect.scheduling.domain.model.AppointmentSlot;
+import java.time.LocalDateTime;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -62,17 +63,19 @@ public class SchedulingApplicationService {
     ) {
         return searchAppointmentsUseCase.execute(
                 status,
-                appointmentType,
                 lawyerId,
-                clientId
+                clientId,
+                appointmentType
         );
     }
 
-    public Appointment reschedule(
-            Appointment appointment
+    public Optional<Appointment> reschedule(
+            UUID appointmentId,
+            LocalDateTime newDateTime
     ) {
         return rescheduleAppointmentUseCase.execute(
-                appointment
+                appointmentId,
+                newDateTime
         );
     }
 

@@ -1,0 +1,41 @@
+package com.jusconnect.scheduling.domain.repository;
+
+import com.jusconnect.scheduling.domain.model.Appointment;
+import com.jusconnect.scheduling.domain.model.AppointmentSlot;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public interface AppointmentRepository {
+
+    Appointment save(
+            Appointment appointment
+    );
+
+    Appointment update(
+            Appointment appointment
+    );
+
+    Optional<Appointment> findById(
+            UUID appointmentId
+    );
+
+    List<Appointment> search(
+            String status,
+            UUID lawyerId,
+            UUID clientId,
+            String appointmentType
+    );
+
+    List<AppointmentSlot> findOccupiedSlots(
+            UUID lawyerId,
+            LocalDate date
+    );
+
+    void delete(
+            UUID appointmentId
+    );
+
+}

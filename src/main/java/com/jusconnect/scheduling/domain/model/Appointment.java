@@ -172,4 +172,8 @@ public class Appointment {
         this.scheduledAt = newDateTime;
         this.status = AppointmentStatus.RESCHEDULED;
     }
+
+    public LocalDateTime getAppointmentDateTime() {
+        return scheduledAt;
+    }
 }
