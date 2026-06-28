@@ -1,6 +1,7 @@
 package com.jusconnect.scheduling.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -24,5 +25,46 @@ public class AppointmentHistoryEntity {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    // getters and setters
+    public AppointmentHistoryEntity() {
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(UUID appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
