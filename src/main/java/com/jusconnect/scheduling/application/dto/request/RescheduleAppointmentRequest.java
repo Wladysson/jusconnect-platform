@@ -37,4 +37,8 @@ public class RescheduleAppointmentRequest {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    public LocalDateTime getNewDateTime() {
+        return null;
+    }
 }
