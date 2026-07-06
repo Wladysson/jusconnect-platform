@@ -29,4 +29,7 @@ public interface ConversationRepository {
     // Remove uma conversa
     void delete(UUID conversationId);
 
+    // Conta as conversas com mensagens não lidas de um usuário
+    Integer countUnreadByUserId(UUID userId);
+
 }

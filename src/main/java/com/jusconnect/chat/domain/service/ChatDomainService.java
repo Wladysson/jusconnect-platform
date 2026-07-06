@@ -130,4 +130,22 @@ public class ChatDomainService {
         messageRepository.delete(messageId);
     }
 
+    // Obtém o histórico de uma conversa
+    public List<Message> getConversationHistory(UUID conversationId) {
+
+        return messageRepository.findByConversationId(conversationId);
+    }
+
+    // Obtém a quantidade de mensagens não lidas
+    public Integer getUnreadMessages(UUID userId) {
+
+        return messageRepository.countUnreadByUserId(userId);
+    }
+
+    // Obtém a quantidade de conversas com mensagens não lidas
+    public Integer getUnreadConversations(UUID userId) {
+
+        return conversationRepository.countUnreadByUserId(userId);
+    }
+
 }

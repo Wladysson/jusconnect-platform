@@ -29,4 +29,7 @@ public interface MessageRepository {
     // Verifica se uma mensagem existe
     boolean existsById(UUID messageId);
 
+    // Conta as mensagens não lidas de um usuário
+    Integer countUnreadByUserId(UUID userId);
+
 }

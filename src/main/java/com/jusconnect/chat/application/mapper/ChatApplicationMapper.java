@@ -56,7 +56,7 @@ public class ChatApplicationMapper {
 
         response.setId(conversation.getId().getValue());
         response.setName(conversation.getName());
-        response.setConversationType(conversation.getConversationType().name());
+        response.setConversationType(conversation.getConversationType());
         response.setStatus(conversation.getStatus().name());
         response.setCreatedBy(conversation.getCreatedBy());
         response.setParticipantIds(conversation.getParticipantsIds());
