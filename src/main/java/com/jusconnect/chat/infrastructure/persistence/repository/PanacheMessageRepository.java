@@ -1,0 +1,86 @@
+package com.jusconnect.chat.infrastructure.persistence.repository;
+
+import com.jusconnect.chat.domain.model.Message;
+import com.jusconnect.chat.domain.repository.MessageRepository;
+import com.jusconnect.chat.infrastructure.persistence.entity.MessageEntity;
+import com.jusconnect.chat.infrastructure.persistence.mapper.ChatPersistenceMapper;
+
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@ApplicationScoped
+public class PanacheMessageRepository implements
+        PanacheRepositoryBase<MessageEntity, UUID>,
+        MessageRepository {
+
+    // Mapper de persistência
+    @Inject
+    ChatPersistenceMapper mapper;
+
+    @Override
+    @Transactional
+    public Message save(Message message) {
+
+        MessageEntity entity = mapper.toEntity(message);
+
+        persist(entity);
+
+        return mapper.toDomain(entity);
+    }
+
+    @Override
+    @Transactional
+    public Message update(Message message) {
+
+        MessageEntity entity = mapper.toEntity(message);
+
+        getEntityManager().merge(entity);
+
+        return mapper.toDomain(entity);
+    }
+
+    @Override
+    public Optional<Message> findById(UUID messageId) {
+
+        return findByIdOptional(messageId)
+                .map(mapper::toDomain);
+    }
+
+    @Override
+    public List<Message> findByConversationId(UUID conversationId) {
+
+        return list("conversationId", conversationId)
+                .stream()
+                .map(entity -> mapper.toDomain((MessageEntity) entity))
+                .toList();
+    }
+
+    @Override
+    public List<Message> findUnreadMessages(UUID userId) {
+
+        return list("status", "SENT")
+                .stream()
+                .map(entity -> mapper.toDomain((MessageEntity) entity))
+                .toList();
+    }
+
+    @Override
+    @Transactional
+    public void delete(UUID messageId) {
+
+        deleteById(messageId);
+    }
+
+    @Override
+    public boolean existsById(UUID messageId) {
+
+        return findByIdOptional(messageId).isPresent();
+    }
+
+}
