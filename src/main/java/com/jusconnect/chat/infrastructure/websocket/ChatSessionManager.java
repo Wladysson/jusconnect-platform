@@ -8,39 +8,61 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatSessionManager {
 
+    // Instância única
     private static final ChatSessionManager INSTANCE = new ChatSessionManager();
 
+    // Sessões ativas
     private final Map<String, Session> sessions = new ConcurrentHashMap<>();
 
     private ChatSessionManager() {
     }
 
+    // Obtém a instância
     public static ChatSessionManager getInstance() {
         return INSTANCE;
     }
 
+    // Adiciona uma sessão
     public void addSession(String userId, Session session) {
-        if (userId == null || session == null) return;
+
         sessions.put(userId, session);
+
     }
 
+    // Remove uma sessão
     public void removeSession(String userId) {
-        if (userId == null) return;
+
         sessions.remove(userId);
+
     }
 
-    public Session getSession(String userId) {
-        return userId == null ? null : sessions.get(userId);
-    }
+    // Envia mensagem para um usuário
+    public void sendMessage(String userId, String message) {
 
-    public void sendToUser(String userId, String message) {
-        Session session = getSession(userId);
-        if (session != null && session.isOpen()) {
-            try {
-                session.getBasicRemote().sendText(message);
-            } catch (IOException e) {
-                // swallow - manager should not throw; logging may be added later
-            }
+        Session session = sessions.get(userId);
+
+        if (session == null) {
+            return;
         }
+
+        if (!session.isOpen()) {
+            return;
+        }
+
+        try {
+
+            session.getBasicRemote().sendText(message);
+
+        } catch (IOException ignored) {
+        }
+
     }
+
+    // Verifica se o usuário está conectado
+    public boolean isConnected(String userId) {
+
+        return sessions.containsKey(userId);
+
+    }
+
 }
