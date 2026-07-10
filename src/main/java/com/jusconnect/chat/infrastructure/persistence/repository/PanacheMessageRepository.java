@@ -5,7 +5,6 @@ import com.jusconnect.chat.domain.repository.MessageRepository;
 import com.jusconnect.chat.infrastructure.persistence.entity.MessageEntity;
 import com.jusconnect.chat.infrastructure.persistence.mapper.ChatPersistenceMapper;
 
-import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -15,9 +14,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
-public class PanacheMessageRepository implements
-        PanacheRepositoryBase<MessageEntity, UUID>,
-        MessageRepository {
+public class PanacheMessageRepository implements MessageRepository {
+
+    @Inject
+    MessagePanacheRepository repository;
 
     // Mapper de persistência
     @Inject
@@ -29,7 +29,7 @@ public class PanacheMessageRepository implements
 
         MessageEntity entity = mapper.toEntity(message);
 
-        persist(entity);
+        repository.persist(entity);
 
         return mapper.toDomain(entity);
     }
@@ -40,7 +40,7 @@ public class PanacheMessageRepository implements
 
         MessageEntity entity = mapper.toEntity(message);
 
-        getEntityManager().merge(entity);
+        repository.getEntityManager().merge(entity);
 
         return mapper.toDomain(entity);
     }
@@ -48,14 +48,15 @@ public class PanacheMessageRepository implements
     @Override
     public Optional<Message> findById(UUID messageId) {
 
-        return findByIdOptional(messageId)
+        return repository.find("id", messageId)
+                .firstResultOptional()
                 .map(mapper::toDomain);
     }
 
     @Override
     public List<Message> findByConversationId(UUID conversationId) {
 
-        return list("conversationId", conversationId)
+        return repository.list("conversationId", conversationId)
                 .stream()
                 .map(entity -> mapper.toDomain((MessageEntity) entity))
                 .toList();
@@ -64,7 +65,7 @@ public class PanacheMessageRepository implements
     @Override
     public List<Message> findUnreadMessages(UUID userId) {
 
-        return list("status", "SENT")
+        return repository.list("status", "SENT")
                 .stream()
                 .map(entity -> mapper.toDomain((MessageEntity) entity))
                 .toList();
@@ -74,13 +75,21 @@ public class PanacheMessageRepository implements
     @Transactional
     public void delete(UUID messageId) {
 
-        deleteById(messageId);
+        repository.deleteById(messageId);
+    }
+
+    @Override
+    public Integer countUnreadByUserId(UUID userId) {
+
+        // Simple count of messages with status SENT; adapt if recipient tracking is added
+        return Math.toIntExact(repository.count("status", "SENT"));
     }
 
     @Override
     public boolean existsById(UUID messageId) {
 
-        return findByIdOptional(messageId).isPresent();
+        return repository.find("id", messageId).firstResultOptional().isPresent();
     }
 
 }
+
